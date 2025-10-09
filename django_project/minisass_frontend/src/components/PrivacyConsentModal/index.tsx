@@ -1,12 +1,12 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import {
-  Button,
   Dialog,
-  DialogActions,
-  DialogContent,
   DialogTitle,
-  Typography,
+  DialogContent,
+  DialogActions,
+  Button,
   Link,
+  Typography,
 } from "@mui/material";
 import axios from "axios";
 import { globalVariables } from "../../utils";
