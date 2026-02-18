@@ -7,7 +7,12 @@ RUN apt-get install lsb-release -y  && apt-get install zip -y && apt-get install
 
 ## Install S3 Fuse
 RUN rm -rf /usr/src/s3fs-fuse
-RUN git clone https://github.com/s3fs-fuse/s3fs-fuse/ /usr/src/s3fs-fuse
+# RUN git clone https://github.com/s3fs-fuse/s3fs-fuse/ /usr/src/s3fs-fuse
+# Pinning to a specific version as the latest version has some issues with the latest fuse library
+RUN git clone https://github.com/s3fs-fuse/s3fs-fuse/ /usr/src/s3fs-fuse && \
+    cd /usr/src/s3fs-fuse && \
+    git checkout v1.89
+
 WORKDIR /usr/src/s3fs-fuse 
 RUN ./autogen.sh && ./configure && make -j 6 && make install
 

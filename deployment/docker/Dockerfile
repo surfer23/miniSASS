@@ -7,7 +7,7 @@ LABEL maintainer="Admire Nyakudya <admire@kartoza.com>"
 
 # Install system dependencies
 RUN apt-get update && \
-    apt-get install -y postgresql-client nano libgdal-dev libcurl4-gnutls-dev librtmp-dev libssl-dev  binutils libproj-dev gdal-bin  curl gcc &&  \
+    apt-get install -y postgresql-client nano libgdal-dev libcurl4-gnutls-dev librtmp-dev libssl-dev  binutils libproj-dev gdal-bin  curl gcc g++ &&  \
     pip install uwsgi setuptools;pip uninstall -y wheel && \
     curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
