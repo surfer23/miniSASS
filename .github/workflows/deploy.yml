@@ -88,7 +88,7 @@ jobs:
         working-directory: deployment
         # replace the placeholder in the task definition with the URL to the new build on ECR
         run: |
-          # Determine Keycloak hostname based on branch
+         
           sed -i "s|<ECR_DJANGO_IMAGE_URI>|$FULL_IMAGE_URI|g" taskdef.json
           sed -i "s|<ECR_TILES_IMAGE_URI>|$FULL_TILES_IMAGE_URI|g" taskdef.json
           sed -i "s|<ECR_S3MOUNT_IMAGE_URI>|$FULL_S3MOUNT_IMAGE_URI|g" taskdef.json
@@ -103,8 +103,8 @@ jobs:
       - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: auth/taskdef.json
-          service: keycloak-auth-service
+          task-definition: deployment/taskdef.json
+          service: minisass-service
           cluster:  ${{ env.CLUSTER_NAME }}
           wait-for-service-stability: true
           

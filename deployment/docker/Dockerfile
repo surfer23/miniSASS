@@ -36,8 +36,8 @@ RUN apt-get -y --purge autoremove  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Open port 8080 as we will be running our uwsgi socket on that
-EXPOSE 8080
+# Open port 8090 as we will be running our uwsgi socket on that
+EXPOSE 8090
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["uwsgi", "--ini", "/uwsgi.conf"]
