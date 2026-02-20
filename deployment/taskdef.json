@@ -181,7 +181,6 @@
           "valueFrom": "<SECRET_ARN>:AWS_SECRET_ACCESS_KEY::"
         }
       ],
-      "privileged": true,
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
