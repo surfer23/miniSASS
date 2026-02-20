@@ -18,7 +18,7 @@ RUN apt-get update && \
 ADD django_project /home/web/django_project
 
 # Copy the requirements.txt file into the container
-ADD deployment/docker/deployment/docker/requirements.txt /REQUIREMENTS.txt
+ADD deployment/docker/requirements.txt /REQUIREMENTS.txt
 
 # Install Python dependencies
 RUN pip --disable-pip-version-check --no-cache-dir install -r /REQUIREMENTS.txt
