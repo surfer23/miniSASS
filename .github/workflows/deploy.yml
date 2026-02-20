@@ -46,7 +46,7 @@ jobs:
           echo "FULL_IMAGE_URI=$FULL_IMAGE_URI" >> $GITHUB_ENV
           docker build -t "$FULL_IMAGE_URI" -f ./deployment/docker/Dockerfile .
           docker push "$FULL_IMAGE_URI"
-        working-directory: deployment/docker 
+       
       
       - name: Build, tag and push Tiles Image
         env:
