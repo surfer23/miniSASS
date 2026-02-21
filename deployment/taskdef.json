@@ -196,15 +196,21 @@
       "name": "efs-media",
       "efsVolumeConfiguration": {
         "fileSystemId": "<MINISASS_EFS_FILE_SYSTEM_ID>",
-        "rootDirectory": "/media",
-        "transitEncryption": "ENABLED"
+        "transitEncryption": "ENABLED",
+        "authorizationConfig": {
+          "accessPointId": "<MINISASS_EFS_MEDIA_ACCESS_POINT_ID>",
+          "iam": "ENABLED"
+        }
       }
     },
     {
       "name": "efs-s3",
       "efsVolumeConfiguration": {
         "fileSystemId": "<MINISASS_EFS_FILE_SYSTEM_ID>",
-        "rootDirectory": "/s3",
+        "authorizationConfig": {
+          "accessPointId": "<MINISASS_EFS_S3_ACCESS_POINT_ID>",
+          "iam": "ENABLED"
+        },
         "transitEncryption": "ENABLED"
       }
     }
