@@ -1,8 +1,8 @@
 {
-  "family": "minisass-fargate-task",
-  "networkMode": "awsvpc",
+  "family": "minisass-task",
+  "networkMode": "bridge",
   "requiresCompatibilities": [
-    "FARGATE"
+    "EC2"
   ],
   "cpu": "1024",
   "memory": "2048",
@@ -151,6 +151,14 @@
       "name": "s3mount",
       "image": "<ECR_S3MOUNT_IMAGE_URI>",
       "essential": true,
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "SYS_ADMIN"
+          ]
+        }
+      },
+      "privileged": true,
       "mountPoints": [
         {
           "sourceVolume": "efs-s3",
@@ -200,7 +208,6 @@
         "transitEncryption": "ENABLED",
         "authorizationConfig": {
           "accessPointId": "<MINISASS_EFS_MEDIA_ACCESS_POINT_ID>"
-  
         }
       }
     },
@@ -210,7 +217,6 @@
         "fileSystemId": "<MINISASS_EFS_FILE_SYSTEM_ID>",
         "authorizationConfig": {
           "accessPointId": "<MINISASS_EFS_S3_ACCESS_POINT_ID>"
-     
         },
         "transitEncryption": "ENABLED"
       }
