@@ -176,6 +176,10 @@
           "value": "minisass-staging"
         },
         {
+          "name": "AWS_REGION",
+          "value": "<AWS_REGION>"
+        },
+        {
           "name": "MINIO_URL",
           "value": "<S3_BUCKET_URL>"
         }

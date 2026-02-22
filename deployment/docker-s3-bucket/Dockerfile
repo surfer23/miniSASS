@@ -23,6 +23,7 @@ ENV \
 	AWS_SECRET_ACCESS_KEY=demopass \
 	S3_MOUNT_DIRECTORY=/var/www/s3 \
 	S3_BUCKET_NAME=demo \
+	AWS_REGION=af-south-1 \
 	MINIO_URL=http://minio:9000/
 
 ## change workdir to /
