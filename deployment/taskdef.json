@@ -10,12 +10,52 @@
   "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSDeploymentTaskRole",
   "containerDefinitions": [
     {
+      "name": "nginx",
+      "image": "<ECR_NGINX_IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8090,
+          "hostPort": 8090,
+          "protocol": "tcp"
+        }
+      ],
+      "dependsOn": [
+        {
+          "containerName": "django",
+          "condition": "START"
+        },
+        {
+          "containerName": "tiles",
+          "condition": "START"
+        },
+        {
+          "containerName": "s3mount",
+          "condition": "HEALTHY"
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "static-data",
+          "containerPath": "/home/web/static"
+        },
+        {
+          "sourceVolume": "media-data",
+          "containerPath": "/home/web/media"
+        },
+        {
+          "sourceVolume": "minio-images",
+          "containerPath": "/home/web/minio"
+        }
+      ]
+    },
+    {
       "name": "django",
       "image": "<ECR_DJANGO_IMAGE_URI>",
       "essential": true,
       "portMappings": [
         {
-          "containerPort": 8090,
+          "containerPort": 8080,
           "protocol": "tcp"
         }
       ],

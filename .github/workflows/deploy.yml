@@ -75,7 +75,20 @@ jobs:
           docker build -t "$FULL_S3MOUNT_IMAGE_URI"  -f ./deployment/docker-s3-bucket/Dockerfile .
           docker push "$FULL_S3MOUNT_IMAGE_URI"
       
-
+      - name: Build, tag and push NGINX Image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: iwmi-minisass
+          # tagging with the environment 'staging-datetime ''
+          IMAGE_TAG: 'staging-nginx-${{ steps.ts.outputs.time  }}'
+        run: |
+          FULL_NGINX_IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          # to make it available in ECS step
+          echo "FULL_NGINX_IMAGE_URI=$FULL_NGINX_IMAGE_URI" >> $GITHUB_ENV
+          docker build -t "$FULL_NGINX_IMAGE_URI"  -f ./deployment/docker-nginx/Dockerfile .
+          docker push "$FULL_NGINX_IMAGE_URI"
+      
+   
       
       - name: Determine Configs
         id: secret
@@ -92,6 +105,7 @@ jobs:
           sed -i "s|<ECR_DJANGO_IMAGE_URI>|$FULL_IMAGE_URI|g" taskdef.json
           sed -i "s|<ECR_TILES_IMAGE_URI>|$FULL_TILES_IMAGE_URI|g" taskdef.json
           sed -i "s|<ECR_S3MOUNT_IMAGE_URI>|$FULL_S3MOUNT_IMAGE_URI|g" taskdef.json
+          sed -i "s|<ECR_NGINX_IMAGE_URI>|$FULL_NGINX_IMAGE_URI|g" taskdef.json
           sed -i "s|<AWS_ACCOUNT_ID>|${{ secrets.AWS_ACCOUNT_ID }}|g" taskdef.json
           sed -i "s|<AWS_REGION>|${{ secrets.AWS_DEPLOYMENT_REGION }}|g" taskdef.json
           sed -i "s|<RDS_DATABASE_HOST>|${{ secrets.RDS_DATABASE_HOST }}|g" taskdef.json
