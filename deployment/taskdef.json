@@ -1,6 +1,6 @@
 {
   "family": "minisass-task",
-  "networkMode": "bridge",
+  "networkMode": "awsvpc",
   "requiresCompatibilities": [
     "MANAGED_INSTANCES"
   ],
