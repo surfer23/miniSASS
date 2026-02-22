@@ -50,11 +50,11 @@
         },
         {
           "name": "MINIO_BUCKET",
-          "value": ""
+          "value": "minisass-staging"
         },
         {
           "name": "MINIO_AI_BUCKET",
-          "value": ""
+          "value": "minisass-staging"
         },
         {
           "name": "MINIO_URL",
@@ -170,6 +170,10 @@
         {
           "name": "S3_MOUNT_DIRECTORY",
           "value": "/var/www/s3"
+        },
+        {
+          "name": "S3_BUCKET_NAME",
+          "value": "minisass-staging"
         },
         {
           "name": "AWS_REGION",
