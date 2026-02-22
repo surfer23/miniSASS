@@ -31,7 +31,7 @@
         },
         {
           "containerName": "s3mount",
-          "condition": "HEALTHY"
+          "condition": "START"
         }
       ],
       "mountPoints": [
