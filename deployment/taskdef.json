@@ -90,7 +90,7 @@
         },
         {
           "name": "DEV_SETUP",
-          "value": "FALSE"
+          "value": "TRUE"
         },
         {
           "name": "GOOGLE_ANALYTICS_TRACKING_CODE",
@@ -133,10 +133,6 @@
         {
           "name": "POSTGRES_PASS",
           "valueFrom": "<SECRET_ARN>:POSTGRES_PASS::"
-        },
-        {
-          "name": "SECRET_KEY",
-          "valueFrom": "<SECRET_ARN>:SECRET_KEY::"
         },
         {
           "name": "AWS_ACCESS_KEY",
