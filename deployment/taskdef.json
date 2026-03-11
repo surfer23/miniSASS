@@ -28,10 +28,16 @@
         {
           "containerName": "tiles",
           "condition": "START"
+        }
+      ],
+      "environment": [
+        {
+          "name": "S3_MEDIA_BUCKET",
+          "value": "minisass-staging"
         },
         {
-          "containerName": "s3mount",
-          "condition": "START"
+          "name": "S3_MEDIA_REGION",
+          "value": "<AWS_REGION>"
         }
       ],
       "mountPoints": [
@@ -42,10 +48,6 @@
         {
           "sourceVolume": "efs-media",
           "containerPath": "/home/web/static"
-        },
-        {
-          "sourceVolume": "efs-s3",
-          "containerPath": "/home/web/minio"
         }
       ],
       "logConfiguration": {

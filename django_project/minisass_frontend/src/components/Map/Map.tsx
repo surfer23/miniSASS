@@ -47,7 +47,7 @@ const initialMapConfig = {
   style: [],
   zoom: 5.3695883239884745,
   attributionControl: false,
-  maxZoom: 24,
+  maxZoom: 19,
 };
 
 /**
@@ -94,7 +94,7 @@ export const Map = forwardRef((props: Interface, ref) => {
                 center: [longitude, latitude],
                 zoom: 5.3695883239884745,
                 attributionControl: false,
-                maxZoom: 24
+                maxZoom: 19
               }
             ).addControl(
               new maplibregl.AttributionControl({ compact: true })
