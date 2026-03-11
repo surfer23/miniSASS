@@ -278,6 +278,8 @@ LOGGING = {
 
 # Minio config
 MINIO_ROOT = os.getenv('MINIO_ROOT', '/home/web/minio')
+# MINIO_BUCKET is used as the directory prefix in file paths (e.g. minisass/observations/...)
+# This must be consistent across environments so URLs in the DB remain valid.
 MINIO_BUCKET = os.getenv('MINIO_BUCKET', 'demo')
 MINION_STORAGE = FileSystemStorage(
     location=MINIO_ROOT, base_url='/minio-media'
@@ -291,7 +293,9 @@ AUTHENTICATION_BACKENDS = [
 
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY") or os.getenv("AWS_ACCESS_KEY")
 MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY") or os.getenv("AWS_SECRET_ACCESS_KEY")
-MINIO_AI_BUCKET = os.getenv("MINIO_BUCKET")
+# MINIO_AI_BUCKET is the actual S3 bucket name for boto3 operations.
+# On staging this differs from MINIO_BUCKET (e.g. minisass-staging vs minisass).
+MINIO_AI_BUCKET = os.getenv("MINIO_AI_BUCKET", os.getenv("MINIO_BUCKET", "demo"))
 MINIO_ENDPOINT = os.getenv("MINIO_URL")
 
 ENABLE_GEOCODING = True

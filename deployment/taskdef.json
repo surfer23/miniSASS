@@ -98,7 +98,7 @@
         },
         {
           "name": "MINIO_BUCKET",
-          "value": "minisass-staging"
+          "value": "minisass"
         },
         {
           "name": "MINIO_AI_BUCKET",
