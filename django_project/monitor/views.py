@@ -655,3 +655,17 @@ class CheckSiteIsLand(APIView):
             cursor.execute(sql_query)
             is_land = cursor.fetchall()[0][0]
             return Response({'is_land': is_land})
+
+
+class ObservationCountView(APIView):
+    """Return the total number of observations."""
+    def get(self, request):
+        count = Observations.objects.count()
+        return Response({'count': count})
+
+
+class SiteCountView(APIView):
+    """Return the total number of sites."""
+    def get(self, request):
+        count = Sites.objects.count()
+        return Response({'count': count})

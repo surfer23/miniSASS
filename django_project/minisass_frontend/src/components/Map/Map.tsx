@@ -65,6 +65,9 @@ export const Map = forwardRef((props: Interface, ref) => {
     useImperativeHandle(ref, () => ({
       updateHighlighGeojson(geojson) {
         addHighlight(geojson)
+      },
+      getMap() {
+        return map;
       }
     }));
 
@@ -100,6 +103,7 @@ export const Map = forwardRef((props: Interface, ref) => {
               new maplibregl.AttributionControl({ compact: true })
             );
             newMap.once("load", () => {
+              newMap.resize();
               setMap(newMap)
               newMap.flyTo({
                 center: [longitude, latitude],

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import Routes from "./Routes";
 import Tooltip from '@mui/material/Tooltip';
 import PrivacyConsentModal from "./components/PrivacyConsentModal"
