@@ -229,7 +229,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
         id: `tab-image-${observation.obs_date}-${index + 1}`,
         label: key,
         content: (
-          <div className="flex flex-row gap-2.5 items-start justify-start overflow-auto w-[566px] sm:w-full alabasta" style={{ marginTop: '10%' }}>
+          <div className="flex flex-row gap-2.5 items-start justify-start overflow-auto w-full alabasta" style={{ marginTop: '10%' }}>
             {
               // Render images if there are any
               imagesPerPest[key].map((image, index) => (
@@ -251,7 +251,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
           id: `tab-image-${observation.obs_date}-1`,
           label: 'No Images',
           content: (
-            <div className="flex items-center justify-center w-[566px] sm:w-full h-[152px] md:h-auto overflow-hidden">
+            <div className="flex items-center justify-center w-full h-[152px] md:h-auto overflow-hidden">
               <span className="text-gray-500">No Images available for site</span>
             </div>
           )
@@ -269,7 +269,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
         id: `tab${index + 1}`,
         label: observation.obs_date,
         content: (
-          <div className="flex flex-row gap-2.5 items-start justify-start overflow-hidden w-[566px] sm:w-full" style={{ marginTop: '10%' }}>
+          <div className="flex flex-row gap-2.5 items-start justify-start overflow-hidden w-full" style={{ marginTop: '10%' }}>
             <TabbedContent
               tabsData={imageTabsData[observation.obs_date] ? imageTabsData[observation.obs_date] : []}
               activeTabIndex={imageTabIndex}
@@ -337,44 +337,41 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
   return (
     <div className={classname}
     style={{
-        height: '74.5vh',
-        overflowY: 'auto',
-        overflowX: 'auto',
+        overflowX: 'hidden',
       }}
     >
-    <div className="flex sm:flex-col flex-row gap-2.5 items-start justify-between w-full">
-      <div className="flex sm:flex-1 sm:flex-col flex-row gap-3 items-center justify-start w-auto sm:w-full">
-        <Text
-          className="text-2xl md:text-[22px] text-blue-900 sm:text-xl w-auto"
-          size="txtRalewayBold24"
-        >
-          miniSASS observation details
-        </Text>
+    <div className="flex flex-row items-center justify-between w-full">
+      <Text
+        className="text-xl text-blue-900 font-bold"
+        size="txtRalewayBold24"
+      >
+        Observation Details
+      </Text>
+      <div className="flex flex-row gap-2 items-center">
         <Img
-          className="h-6 w-6"
+          className="h-5 w-5 cursor-pointer"
           src={`${globalVariables.staticPath}img_mdidownloadcircleoutline.svg`}
-          alt="mdidownloadcirc"
+          alt="Download"
           onClick={() => {setIsDownloadModalOpen(true)}}
         />
-         <DownloadObservationForm
-           isOpen={isDownloadModalOpen}
-           onClose={closeDownloadModal}
-           siteId={observationDetails.site?.gid}
-           dateRange={[minDate, maxDate]}
-         />
-          <Img
-          className="h-6 w-6"
+        <DownloadObservationForm
+          isOpen={isDownloadModalOpen}
+          onClose={closeDownloadModal}
+          siteId={observationDetails.site?.gid}
+          dateRange={[minDate, maxDate]}
+        />
+        <Img
+          className="h-5 w-5 cursor-pointer"
           src={`${globalVariables.staticPath}mdi_chart.svg`}
-          alt="mdichartimg"
+          alt="Chart"
           onClick={() => {setIsChartHidden(!isChartHidden)}}
         />
+        <button onClick={handleCloseSidebar} className="ml-1 rounded-lg p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-800">
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
-      <Img
-        className="h-6 w-6"
-        src={`${globalVariables.staticPath}img_icbaselineclose.svg`}
-        alt="icbaselineclose"
-        onClick={handleCloseSidebar}
-      />
     </div>
     <div style={{width: '100%'}}>
       <LineChart
@@ -404,15 +401,15 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
           setActiveTabIndex(index);
         }}
       />
-      <div className="flex flex-col gap-6 h-[543px] md:h-auto items-start justify-start w-full">
-            <div className="flex flex-row gap-1 items-center justify-start pt-2 w-full">
+      <div className="flex flex-col gap-6 items-start justify-start w-full">
+            <div className="flex flex-row gap-1 items-center justify-between pt-2 w-full">
               <Text
-                className={`${titleColor} text-lg w-[140px]`}
+                className={`${titleColor} text-lg shrink-0`}
                 size="txtRalewayBold18"
               >
                 Average score:
               </Text>
-              <div className="flex flex-row gap-2.5 items-center justify-start w-auto" style={{ marginLeft: '50%' }}>
+              <div className="flex flex-row gap-2.5 items-center justify-start w-auto">
                 <div className="h-[68px] relative w-[68px]">
                   <div className="h-[68px] m-auto w-[68px]">
 
@@ -465,7 +462,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
               </div>
             </div>
             {/* collapsible dropdowns */}
-            <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
+            <div className="flex flex-col gap-3 items-start justify-start w-full">
               <div className="flex items-center gap-3">
                   <Text
                     className="text-blue-900 text-lg w-auto"
@@ -479,7 +476,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
               </div>
               {isSiteDetailsOpen && (
                 <>
-                  <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  <div className="flex flex-row gap-3 items-center justify-between w-full">
                     <Text
                       className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                       size="txtRalewayRomanRegular18"
@@ -493,7 +490,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                       {observationDetails.rivername ? observationDetails.rivername : siteDetails.river_name}
                     </Text>
                   </div>
-                  <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  <div className="flex flex-row gap-3 items-center justify-between w-full">
                     <Text
                       className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                       size="txtRalewayRomanRegular18"
@@ -507,25 +504,23 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                       {observationDetails.sitename ? observationDetails.sitename : siteDetails.site_name}
                     </Text>
                   </div>
-                  <div
-                    className="flex sm:flex-col flex-row gap-3 h-[75px] md:h-auto items-start justify-between w-[541px] sm:w-full"
-                    style={{marginTop: '3%'}}>
+                  <div className="flex flex-col gap-1 w-full mt-1">
                     <Text
-                      className="text-gray-800_01 text-lg tracking-[0.15px] w-auto self-end"
+                      className="text-gray-800_01 text-lg tracking-[0.15px]"
                       size="txtRalewayRomanRegular18"
                     >
                       Site description:
                     </Text>
-                    <div className="overflow-y-auto max-h-[75px] md:max-h-[unset] max-w-[250px] md:max-w-full">
+                    <div className="overflow-y-auto max-h-[75px]">
                       <Text
-                        className="leading-[24.00px] text-gray-800_01 text-lg tracking-[0.15px] self-end text-right"
+                        className="leading-[24.00px] text-gray-800_01 text-base tracking-[0.15px]"
                         size="txtRalewayRomanRegular18"
                       >
                         {observationDetails.sitedescription ? observationDetails.sitedescription : siteDetails.description}
                       </Text>
                     </div>
                   </div>
-                  <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  <div className="flex flex-row gap-3 items-center justify-between w-full">
                     <Text
                       className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                       size="txtRalewayRomanRegular18"
@@ -544,7 +539,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                       }
                     </Text>
                   </div>
-                  <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  <div className="flex flex-row gap-3 items-center justify-between w-full">
                     <Text
                       className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                       size="txtRalewayRomanRegular18"
@@ -563,7 +558,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                       }
                     </Text>
                   </div>
-                  <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  <div className="flex flex-row gap-3 items-center justify-between w-full">
                     <Text
                       className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                       size="txtRalewayRomanRegular18"
@@ -582,7 +577,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                       }
                     </Text>
                   </div>
-                  <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  <div className="flex flex-row gap-3 items-center justify-between w-full">
                     <Text
                       className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                       size="txtRalewayRomanRegular18"
@@ -600,7 +595,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
               )}
             </div>
 
-        <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
+        <div className="flex flex-col gap-3 items-start justify-start w-full">
           <div className="flex items-center gap-3">
             <Text
               className="text-blue-900 text-lg w-auto"
@@ -615,7 +610,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
 
           {isObservationDetailsOpen && (
             <>
-              <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+              <div className="flex flex-row gap-3 items-center justify-between w-full">
                 <Text
                   className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                   size="txtRalewayRomanRegular18"
@@ -632,7 +627,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                           ? siteWithObservations.observations[0].obs_date
                           : 'dd/mm/yyyy')}
                     </Text>
-                  </div><div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                  </div><div className="flex flex-row gap-3 items-center justify-between w-full">
                       <Text
                         className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                         size="txtRalewayRomanRegular18"
@@ -649,7 +644,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                             ? siteWithObservations.observations[0].collectorsname
                             : '')}
                       </Text>
-                    </div><div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                    </div><div className="flex flex-row gap-3 items-center justify-between w-full">
                       <Text
                         className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                         size="txtRalewayRomanRegular18"
@@ -667,7 +662,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                             : 'N/A')}
                       </Text>
                     </div>
-                    <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                    <div className="flex flex-row gap-3 items-center justify-between w-full">
                       <Text
                         className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                         size="txtRalewayRomanRegular18"
@@ -688,7 +683,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
             </>
               )}
 
-            <div className="flex flex-col gap-3 items-start justify-start w-auto sm:w-full">
+            <div className="flex flex-col gap-3 items-start justify-start w-full">
               <div className="flex items-center gap-3">
                 <Text
                   className="text-blue-900 text-lg w-auto"
@@ -703,7 +698,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
 
 
               {isMeasurementsOpen && (
-                <><div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                <><div className="flex flex-row gap-3 items-center justify-between w-full">
                       <Text
                         className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                         size="txtRalewayRomanRegular18"
@@ -734,7 +729,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
 
                       </Text>
                     </div>
-                    <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                    <div className="flex flex-row gap-3 items-center justify-between w-full">
                         <Text
                           className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                           size="txtRalewayRomanRegular18"
@@ -767,7 +762,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                         </Text>
                       </div>
 
-                      <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                      <div className="flex flex-row gap-3 items-center justify-between w-full">
                         <Text
                           className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                           size="txtRalewayRomanRegular18"
@@ -799,7 +794,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                         </Text>
                       </div>
 
-                      <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                      <div className="flex flex-row gap-3 items-center justify-between w-full">
                         <Text
                           className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                           size="txtRalewayRomanRegular18"
@@ -831,7 +826,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
                         </Text>
                       </div>
 
-                      <div className="flex flex-row gap-3 items-center justify-between w-[541px] sm:w-full">
+                      <div className="flex flex-row gap-3 items-center justify-between w-full">
                         <Text
                           className="text-gray-800_01 text-lg tracking-[0.15px] w-auto"
                           size="txtRalewayRomanRegular18"

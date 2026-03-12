@@ -308,7 +308,7 @@ const MapPage: React.FC = () => {
 
       {/* ── Sidebar ── */}
       <div
-        className={`absolute bottom-0 right-0 top-0 z-40 w-full bg-surface shadow-card transition-transform duration-300 ease-in-out sm:w-[420px] ${
+        className={`absolute bottom-0 right-0 top-0 z-40 w-full bg-surface shadow-card transition-transform duration-300 ease-in-out sm:w-[580px] ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

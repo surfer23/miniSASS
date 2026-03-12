@@ -11,7 +11,7 @@ const TabbedContent = ({ tabsData, activeTabIndex, onTabChange }) => {
 
   return (
     <div className="flex flex-col items-start justify-start">
-      <div className="flex gap-5 w-[30vw] overflow-x-auto pt-5">
+      <div className="flex gap-5 w-full overflow-x-auto pt-5">
         {sortedTabsData.length > 0 && sortedTabsData.map((tab, index) => (
           tab.label !== 'No Images' && (
             <button
