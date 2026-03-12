@@ -461,7 +461,7 @@ export const Map = forwardRef((props: Interface, ref) => {
         const response = await axios.get(`${globalVariables.baseUrl}/monitor/site-observations/${latitude}/${longitude}/?gid=${gid}`);
     
         if (response.data) {
-          window.location.href = window.location.href.split('?')[0];
+          window.history.replaceState(null, "", window.location.pathname);
           var data = response.data;
           if (data.observations.length === 0) {
             data.observations = [{
