@@ -341,10 +341,10 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
 
   // Helper: render a detail row with icon, label, value, and alternating bg
   const DetailRow = ({ icon, label, value, odd = false }: { icon: React.ReactNode; label: string; value: React.ReactNode; odd?: boolean }) => (
-    <div className={`flex items-center gap-3 px-3 py-2 rounded-lg ${odd ? 'bg-gray-50' : ''}`}>
+    <div className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 rounded-lg ${odd ? 'bg-gray-50' : ''}`}>
       <span className="text-blue-900 shrink-0">{icon}</span>
-      <span className="text-sm text-gray-500 shrink-0">{label}</span>
-      <span className="ml-auto text-sm font-medium text-gray-800 text-right">{value || 'N/A'}</span>
+      <span className="text-xs sm:text-sm text-gray-500 shrink-0 whitespace-nowrap">{label}</span>
+      <span className="ml-auto text-xs sm:text-sm font-medium text-gray-800 text-right truncate min-w-0">{value || 'N/A'}</span>
     </div>
   );
 
@@ -362,7 +362,7 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
     <div className={classname} style={{ overflowX: 'hidden' }}>
     {/* Header */}
     <div className="flex items-center justify-between w-full pb-2 border-b border-gray-200">
-      <span className="text-lg text-blue-900 font-bold">Observation Details</span>
+      <span className="text-base sm:text-lg text-blue-900 font-bold">Observation Details</span>
       <div className="flex items-center gap-1.5">
         <button onClick={() => setIsDownloadModalOpen(true)} className="rounded-lg p-1.5 text-blue-900 hover:bg-blue-50" title="Download">
           <FiDownload size={18} />
@@ -411,8 +411,8 @@ const ObservationDetails: React.FC<ObservationDetailsProps> = ({
       />
 
       {/* Score card */}
-      <div className="flex items-center justify-between w-full rounded-xl bg-gradient-to-r from-blue-50 to-white p-3 mt-1">
-        <span className={`${titleColor} text-base font-bold`}>Average score</span>
+      <div className="flex items-center justify-between w-full rounded-xl bg-gradient-to-r from-blue-50 to-white p-2 sm:p-3 mt-1">
+        <span className={`${titleColor} text-sm sm:text-base font-bold`}>Average score</span>
         <div className="flex items-center gap-3">
           <div className="h-[60px] relative w-[60px]">
             <div className="h-[60px] m-auto w-[60px]">

@@ -41,6 +41,7 @@ const MapPage: React.FC = () => {
   const [idxActive, setIdxActive] = useState(open_add_record ? 1 : 0);
   const [isDisableNavigations, setIsDisableNavigations] = useState(false);
   const [showLegend, setShowLegend] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [selectingOnMap, setSelectingOnMap] = useState(false);
   const [selectedCoordinates, setSelectedCoordinates] = useState({ latitude: null, longitude: null });
   const [siteWithObservations, setSiteWithObservations] = useState({ site: {}, observations: [] });
@@ -171,7 +172,7 @@ const MapPage: React.FC = () => {
             aria-label="miniSASS Home"
           >
             <Img
-              className="h-12 w-auto object-contain sm:h-14"
+              className="h-10 w-auto object-contain sm:h-14"
               src={`${globalVariables.staticPath}img_minisasslogo1.png`}
               alt="miniSASS"
             />
@@ -204,14 +205,25 @@ const MapPage: React.FC = () => {
           </nav>
 
           {/* Search + Add Record + Auth */}
-          <div className="flex items-center gap-2">
-            <div className="w-48 sm:w-64">
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Search — hidden on mobile, shown on sm+ */}
+            <div className="hidden sm:block sm:w-64">
               <Search searchEntityChanged={(geojson: any) => mapRef?.current?.updateHighlighGeojson(geojson)} />
             </div>
+            {/* Search icon — mobile only, toggles search overlay */}
+            <button
+              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-primary hover:bg-surface-muted sm:hidden"
+              aria-label="Search"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
 
             <button
               onClick={handleSidebarToggle}
-              className="flex items-center gap-2 rounded-tr-xl rounded-bl-xl rounded-br-xl bg-accent px-4 py-2.5 text-body-sm font-semibold text-text-inverse shadow-card transition-all hover:bg-accent-dark hover:shadow-card-hover"
+              className="flex items-center gap-1.5 sm:gap-2 rounded-tr-xl rounded-bl-xl rounded-br-xl bg-accent px-3 sm:px-4 py-2 sm:py-2.5 text-body-sm font-semibold text-text-inverse shadow-card transition-all hover:bg-accent-dark hover:shadow-card-hover"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -219,10 +231,32 @@ const MapPage: React.FC = () => {
               <span className="hidden sm:inline">Add Record</span>
             </button>
 
-            <AuthenticationButtons isDisableNavigations={isDisableNavigations} />
+            <div className="hidden sm:block">
+              <AuthenticationButtons isDisableNavigations={isDisableNavigations} />
+            </div>
           </div>
         </div>
       </header>
+
+      {/* ── Mobile search overlay ── */}
+      {mobileSearchOpen && (
+        <div className="absolute left-0 right-0 top-[60px] z-30 bg-surface/95 px-3 py-2 shadow-md backdrop-blur-sm sm:hidden">
+          <div className="flex items-center gap-2">
+            <div className="flex-1">
+              <Search searchEntityChanged={(geojson: any) => { mapRef?.current?.updateHighlighGeojson(geojson); setMobileSearchOpen(false); }} />
+            </div>
+            <button
+              onClick={() => setMobileSearchOpen(false)}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-primary hover:bg-surface-muted"
+              aria-label="Close search"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── Map (fills entire viewport behind everything) ── */}
       <div className="absolute inset-0">

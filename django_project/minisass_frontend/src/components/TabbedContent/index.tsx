@@ -11,12 +11,12 @@ const TabbedContent = ({ tabsData, activeTabIndex, onTabChange }) => {
 
   return (
     <div className="flex flex-col items-start justify-start">
-      <div className="flex gap-5 w-full overflow-x-auto pt-5">
+      <div className="flex gap-2 sm:gap-5 w-full overflow-x-auto pt-5">
         {sortedTabsData.length > 0 && sortedTabsData.map((tab, index) => (
           tab.label !== 'No Images' && (
             <button
               key={tab.id}
-              className={`cursor-pointer min-w-[126px] text-base text-center focus:outline-none ${activeTabIndex === index ? 'border-b-4 border-blue-900 text-blue-900' : ''}`}
+              className={`cursor-pointer min-w-[90px] sm:min-w-[126px] text-sm sm:text-base text-center focus:outline-none whitespace-nowrap ${activeTabIndex === index ? 'border-b-4 border-blue-900 text-blue-900' : ''}`}
               onClick={() => handleTabChange(index)}
             >
               {tab.label}
